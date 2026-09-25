@@ -1,305 +1,374 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio - สหกิจศึกษา</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- FontAwesome ไอคอน -->
+    <title>Portfolio - ฝึกสหกิจศึกษา</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#090d16',
+                        cardBg: '#111827',
+                        accentBlue: '#00f2fe',
+                        accentPurple: '#4facfe',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontPrompt & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        /* CSS ภายในไฟล์เดียว */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Prompt', sans-serif;
-            scroll-behavior: smooth;
-        }
-
         body {
-            color: #333;
-            line-height: 1.6;
-            background-color: #f9f9f9;
+            font-family: 'Prompt', sans-serif;
+            background-color: #090d16;
+            color: #f3f4f6;
         }
-
-        /* Navbar */
-        header {
-            background: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 242, 254, 0.15);
         }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
+        .glass-card:hover {
+            border-color: rgba(0, 242, 254, 0.4);
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.15);
         }
-
-        .logo {
-            font-weight: 600;
-            font-size: 1.2rem;
-            color: #2575fc;
-            text-decoration: none;
+        .text-glow {
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
         }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 20px;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #555;
-            font-size: 0.95rem;
-            transition: color 0.3s;
+        ::-webkit-scrollbar-track {
+            background: #090d16;
         }
-
-        .nav-links a:hover {
-            color: #2575fc;
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
         }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: white;
-            text-align: center;
-            padding: 160px 20px 100px;
-        }
-
-        .hero-content h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
-        .hero-content h1 span {
-            color: #ffd700;
-        }
-
-        .hero-content p {
-            font-size: 1.1rem;
-            margin-bottom: 25px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn {
-            display: inline-block;
-            background: white;
-            color: #2575fc;
-            padding: 10px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-
-        /* General Section */
-        .section {
-            padding: 80px 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .section h2 {
-            font-size: 2rem;
-            margin-bottom: 40px;
-            color: #222;
-        }
-
-        .bg-light {
-            background-color: #fff;
-            max-width: 100%;
-        }
-
-        /* Skills Grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 20px;
-        }
-
-        .skill-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            font-weight: 600;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            font-size: 1rem;
-        }
-
-        .skill-card i {
-            font-size: 2rem;
-            color: #2575fc;
-        }
-
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .project-card {
-            background: #f9f9f9;
-            padding: 25px;
-            border-radius: 10px;
-            text-align: left;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
-        }
-
-        .project-card h3 {
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .project-card p {
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-        }
-
-        .project-link {
-            color: #2575fc;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        /* Contact & Social */
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            font-size: 1.8rem;
-            margin-top: 20px;
-        }
-
-        .social-icons a {
-            color: #444;
-            transition: color 0.3s;
-        }
-
-        .social-icons a:hover {
-            color: #2575fc;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #222;
-            color: #aaa;
-            font-size: 0.85rem;
-        }
-
-        /* Responsive Media Query */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 10px;
-                padding: 15px;
-            }
-            
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-            
-            .section {
-                padding: 50px 20px;
-            }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f2fe;
         }
     </style>
 </head>
-<body>
+<body class="bg-darkBg text-gray-100 selection:bg-accentBlue selection:text-black">
 
-    <!-- Navigation Bar -->
-    <header>
-        <nav class="navbar">
-            <a href="#" class="logo">Portfolio.</a>
-            <ul class="nav-links">
-                <li><a href="#about">เกี่ยวกับฉัน</a></li>
-                <li><a href="#skills">ทักษะ</a></li>
-                <li><a href="#projects">ผลงาน</a></li>
-                <li><a href="#contact">ติดต่อ</a></li>
-            </ul>
-        </nav>
+    <!-- Navbar -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-card border-b border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-accentBlue to-accentPurple text-glow">
+                PORTFOLIO <span class="text-xs text-gray-400 block font-normal">Co-op Education</span>
+            </a>
+            
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#about" class="hover:text-accentBlue transition">เกี่ยวกับฉัน</a>
+                <a href="#coop" class="hover:text-accentBlue transition">ฝึกสหกิจ</a>
+                <a href="#skills" class="hover:text-accentBlue transition">ทักษะความสามารถ</a>
+                <a href="#projects" class="hover:text-accentBlue transition">ผลงานโปรเจกต์</a>
+                <a href="#contact" class="hover:text-accentBlue transition">ติดต่อ</a>
+            </nav>
+
+            <div class="hidden md:block">
+                <a href="#contact" class="px-4 py-2 text-xs font-semibold rounded-full bg-gradient-to-r from-accentBlue to-accentPurple text-black hover:opacity-95 transition shadow-lg shadow-cyan-500/20">
+                    <i class="fa-solid fa-file-arrow-down mr-1"></i> ดาวน์โหลดเรซูเม่
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden glass-card border-t border-gray-800 px-4 pt-2 pb-4 space-y-3">
+            <a href="#about" class="block hover:text-accentBlue transition">เกี่ยวกับฉัน</a>
+            <a href="#coop" class="block hover:text-accentBlue transition">ฝึกสหกิจ</a>
+            <a href="#skills" class="block hover:text-accentBlue transition">ทักษะความสามารถ</a>
+            <a href="#projects" class="block hover:text-accentBlue transition">ผลงานโปรเจกต์</a>
+            <a href="#contact" class="block hover:text-accentBlue transition">ติดต่อ</a>
+        </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="about">
-        <div class="hero-content">
-            <h1>สวัสดีค่ะ, <span>นริษา เหมือนใจ</span></h1>
-            <p>นักศึกษาฝึกงานตำแหน่ง <strong>IT</strong> พร้อมเรียนรู้และพัฒนาโปรเจกต์จริงเพื่อสหกิจศึกษา</p>
-            <a href="#projects" class="btn">ดูผลงานของฉัน</a>
+    <section class="min-h-screen flex items-center justify-center pt-20 px-4 relative overflow-hidden">
+        <!-- Background glowing blobs -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-72 h-72 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto text-center z-10">
+            <span class="inline-block px-4 py-1.5 mb-6 text-xs font-semibold rounded-full bg-blue-950/80 text-accentBlue border border-cyan-500/30">
+                <i class="fa-solid fa-graduation-cap mr-1.5"></i> เตรียมความพร้อมฝึกสหกิจศึกษา (Co-op Education)
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-bold tracking-tight mb-6">
+                สวัสดีครับ, ผม <span class="text-transparent bg-clip-text bg-gradient-to-r from-accentBlue to-accentPurple text-glow">[ชื่อ - นามสกุลของคุณ]</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+                นักศึกษาชั้นปีที่ [ระบุชั้นปี] สาขา <span class="text-gray-200">[ระบุสาขาวิชา/คณะ]</span> มุ่งมั่นพัฒนาทักษะทางด้านซอฟต์แวร์และการแก้ปัญหา พร้อมเรียนรู้และปฏิบัติงานจริงในสถานประกอบการ
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#coop" class="px-6 py-3 rounded-xl bg-gradient-to-r from-accentBlue to-accentPurple text-black font-semibold hover:opacity-90 transition shadow-lg shadow-cyan-500/25">
+                    ดูรายละเอียดการฝึกสหกิจ <i class="fa-solid fa-arrow-right ml-1"></i>
+                </a>
+                <a href="#projects" class="px-6 py-3 rounded-xl glass-card text-gray-200 font-semibold hover:bg-gray-800/80 transition">
+                    ชมผลงานโปรเจกต์
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="py-20 px-4 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-accentBlue to-accentPurple">เกี่ยวกับฉัน</h2>
+            <p class="text-gray-400 text-sm">ประวัติส่วนตัวและเป้าหมายในการฝึกสหกิจศึกษา</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+            <div class="md:col-span-1 flex justify-center">
+                <div class="relative w-48 h-48 sm:w-60 sm:h-60 rounded-2xl overflow-hidden glass-card p-2">
+                    <!-- ใส่รูปโปรไฟล์ของคุณแทนที่ลิงก์ด้านล่าง -->
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=500" alt="Profile" class="w-full h-full object-cover rounded-xl filter grayscale hover:grayscale-0 transition duration-500">
+                </div>
+            </div>
+            <div class="md:col-span-2 glass-card p-6 sm:p-8 rounded-2xl">
+                <h3 class="text-xl font-semibold mb-4 text-accentBlue">ข้อมูลส่วนตัว</h3>
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    เป็นคนที่มีความกระตือรือร้นในการเรียนรู้เทคโนโลยีใหม่ๆ ชอบการทำงานเป็นทีม และมีความรับผิดชอบสูง มุ่งเน้นการพัฒนาโปรแกรมที่มีประสิทธิภาพและตอบโจทย์ผู้ใช้งานจริง การฝึกสหกิจครั้งนี้ถือเป็นโอกาสสำคัญในการประยุกต์ใช้ความรู้ทางทฤษฎีสู่วิชาชีพจริง
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                    <div><span class="text-gray-400">มหาวิทยาลัย:</span> [ระบุชื่อมหาวิทยาลัย]</div>
+                    <div><span class="text-gray-400">คณะ/สาขา:</span> [ระบุคณะและสาขา]</div>
+                    <div><span class="text-gray-400">เกรดเฉลี่ย (GPA):</span> [ระบุ GPA เช่น 3.50]</div>
+                    <div><span class="text-gray-400">เป้าหมาย:</span> Software Engineer / Frontend Dev</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cooperative Education Section -->
+    <section id="coop" class="py-20 px-4 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-accentBlue to-accentPurple">รายละเอียดการฝึกสหกิจ</h2>
+            <p class="text-gray-400 text-sm">ข้อมูลการปฏิบัติงานและโปรเจกต์ที่ได้รับมอบหมาย</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Company Info -->
+            <div class="glass-card p-6 sm:p-8 rounded-2xl flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-blue-950/80 border border-cyan-500/30 flex items-center justify-center text-accentBlue">
+                            <i class="fa-solid fa-building"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold">[ชื่อสถานประกอบการ / บริษัท]</h3>
+                            <p class="text-xs text-gray-400">ตำแหน่ง: [ระบุตำแหน่ง เช่น Frontend Developer Intern]</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                        ระยะเวลาฝึกงาน: [ระบุเดือน เช่น มกราคม - พฤษภาคม 2026] <br>
+                        ปฏิบัติหน้าที่ในส่วนของการพัฒนาเว็บแอปพลิเคชันและปรับปรุงระบบภายในองค์กรให้มีความเสถียรและใช้งานง่ายยิ่งขึ้น
+                    </p>
+                </div>
+                <div class="border-t border-gray-800 pt-4 text-xs text-gray-400">
+                    <i class="fa-solid fa-circle-check text-accentBlue mr-1"></i> ปฏิบัติงานภายใต้การดูแลของ Mentor ผู้เชี่ยวชาญ
+                </div>
+            </div>
+
+            <!-- Co-op Project -->
+            <div class="glass-card p-6 sm:p-8 rounded-2xl flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-purple-950/80 border border-purple-500/30 flex items-center justify-center text-accentPurple">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold">[ชื่อโปรเจกต์สหกิจศึกษา]</h3>
+                            <p class="text-xs text-gray-400">Project Assignment</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                        พัฒนาระบบ <span class="text-gray-100">[อธิบายสั้นๆ เกี่ยวกับระบบที่ทำในช่วงสหกิจ เช่น ระบบจัดการคลังสินค้า / ระบบแดชบอร์ดข้อมูล]</span> โดยใช้เทคโนโลยีที่ทันสมัยเพื่อเพิ่มประสิทธิภาพการทำงานภายในองค์กร
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2.5 py-1 text-xs rounded bg-blue-950 text-accentBlue border border-cyan-500/20">HTML/CSS/JS</span>
+                    <span class="px-2.5 py-1 text-xs rounded bg-blue-950 text-accentBlue border border-cyan-500/20">Tailwind CSS</span>
+                    <span class="px-2.5 py-1 text-xs rounded bg-blue-950 text-accentBlue border border-cyan-500/20">Git / GitHub</span>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section class="section" id="skills">
-        <h2>ทักษะและความสามารถ</h2>
-        <div class="skills-grid">
-            <div class="skill-card"><i class="fa-brands fa-html5"></i> HTML / CSS</div>
-            <div class="skill-card"><i class="fa-brands fa-js"></i> JavaScript</div>
-            <div class="skill-card"><i class="fa-brands fa-git-alt"></i> GitHub</div>
+    <section id="skills" class="py-20 px-4 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-accentBlue to-accentPurple">ทักษะและความสามารถ</h2>
+            <p class="text-gray-400 text-sm">เครื่องมือและภาษาโปรแกรมที่ถนัด</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <!-- Skill Category 1 -->
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="text-accentBlue text-2xl mb-4"><i class="fa-solid fa-code"></i></div>
+                <h3 class="text-lg font-semibold mb-3">Frontend Development</h3>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-center"><i class="fa-solid fa-check text-accentBlue mr-2 text-xs"></i> HTML5 / CSS3 / JavaScript (ES6+)</li>
+                    <li class="flex items-center"><i class="fa-solid fa-check text-accentBlue mr-2 text-xs"></i> Tailwind CSS / Responsive Design</li>
+                    <li class="flex items-center"><i class="fa-solid fa-check text-accentBlue mr-2 text-xs"></i> React.js (พื้นฐาน/ปานกลาง)</li>
+                </ul>
+            </div>
+
+            <!-- Skill Category 2 -->
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="text-accentPurple text-2xl mb-4"><i class="fa-solid fa-server"></i></div>
+                <h3 class="text-lg font-semibold mb-3">Tools & Workflow</h3>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-center"><i class="fa-solid fa-check text-accentPurple mr-2 text-xs"></i> Git & GitHub / GitHub Pages</li>
+                    <li class="flex items-center"><i class="fa-solid fa-check text-accentPurple mr-2 text-xs"></i> VS Code / Mobile IDEs</li>
+                    <li class="flex items-center"><i class="fa-solid fa-check text-accentPurple mr-2 text-xs"></i> RESTful APIs Integration</li>
+                </ul>
+            </div>
+
+            <!-- Skill Category 3 -->
+            <div class="glass-card p-6 rounded-2xl sm:col-span-2 md:col-span-1">
+                <div class="text-cyan-400 text-2xl mb-4"><i class="fa-solid fa-users-gear"></i></div>
+                <h3 class="text-lg font-semibold mb-3">Soft Skills</h3>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-center"><i class="fa-solid fa-check text-cyan-400 mr-2 text-xs"></i> การทำงานร่วมกับผู้อื่น (Teamwork)</li>
+                    <li class="flex items-center"><i class="fa-solid fa-check text-cyan-400 mr-2 text-xs"></i> การเรียนรู้ไว (Fast Learner)</li>
+                    <li class="flex items-center"><i class="fa-solid fa-check text-cyan-400 mr-2 text-xs"></i> การบริหารเวลาและการจัดการปัญหา</li>
+                </ul>
+            </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section class="section bg-light" id="projects">
-        <h2>โปรเจกต์เด่น</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <h3>ชื่อโปรเจกต์ที่ 1</h3>
-                <p>รายละเอียดสั้นๆ เกี่ยวกับโปรเจกต์ที่คุณทำเพื่อใช้ยื่นสหกิจศึกษา</p>
-                <a href="#" target="_blank" class="project-link">ดูโค้ดเพิ่มเติม <i class="fa-solid fa-arrow-right"></i></a>
+    <section id="projects" class="py-20 px-4 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-accentBlue to-accentPurple">ผลงานโปรเจกต์</h2>
+            <p class="text-gray-400 text-sm">ตัวอย่างผลงานที่ผ่านมาและโปรเจกต์สะสมใน Portfolio</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Project 1 -->
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-semibold text-accentBlue">[ชื่อโปรเจกต์ที่ 1 เช่น Web Portfolio]</h3>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-github text-xl"></i></a>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4 leading-relaxed">
+                        เว็บไซต์พอร์ตโฟลิโอส่วนตัวดีไซน์ทันสมัย รองรับการแสดงผลทุกหน้าจอ สร้างขึ้นเพื่อนำเสนอผลงานและประวัติการทำงานสำหรับสมัครฝึกสหกิจ
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-0.5 text-xs rounded bg-gray-800 text-gray-300">HTML5</span>
+                        <span class="px-2 py-0.5 text-xs rounded bg-gray-800 text-gray-300">Tailwind CSS</span>
+                        <span class="px-2 py-0.5 text-xs rounded bg-gray-800 text-gray-300">JavaScript</span>
+                    </div>
+                </div>
+                <div class="px-6 py-4 bg-gray-900/50 border-t border-gray-800 flex justify-between items-center text-xs">
+                    <span class="text-gray-400">สถานะ: สำเร็จแล้ว</span>
+                    <a href="#" class="text-accentBlue hover:underline flex items-center">ดูตัวอย่างเว็บไซต์ <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
+                </div>
             </div>
-            <div class="project-card">
-                <h3>ชื่อโปรเจกต์ที่ 2</h3>
-                <p>รายละเอียดสั้นๆ เกี่ยวกับโปรเจกต์ชิ้นที่สองของคุณ</p>
-                <a href="#" target="_blank" class="project-link">ดูโค้ดเพิ่มเติม <i class="fa-solid fa-arrow-right"></i></a>
+
+            <!-- Project 2 -->
+            <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-semibold text-accentPurple">[ชื่อโปรเจกต์ที่ 2 เช่น ระบบจัดการร้านค้า]</h3>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-github text-xl"></i></a>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4 leading-relaxed">
+                        เว็บแอปพลิเคชันจำลองระบบสั่งซื้อสินค้าและจัดการสต็อกสินค้า ออกแบบโครงสร้างฐานข้อมูลและระบบ User Interface ให้ใช้งานง่าย
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-0.5 text-xs rounded bg-gray-800 text-gray-300">JavaScript</span>
+                        <span class="px-2 py-0.5 text-xs rounded bg-gray-800 text-gray-300">REST API</span>
+                    </div>
+                </div>
+                <div class="px-6 py-4 bg-gray-900/50 border-t border-gray-800 flex justify-between items-center text-xs">
+                    <span class="text-gray-400">สถานะ: สำเร็จแล้ว</span>
+                    <a href="#" class="text-accentPurple hover:underline flex items-center">ดูซอร์สโค้ด <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="section" id="contact">
-        <h2>ช่องทางการติดต่อ</h2>
-        <p>ยินดีรับฟังข้อเสนอและโอกาสในการฝึกงานสหกิจศึกษาค่ะ</p>
-        <div class="social-icons">
-            <a href="mailto:your-email@example.com"><i class="fa-solid fa-envelope"></i></a>
-            <a href="https://github.com/yourusername" target="_blank"><i class="fa-brands fa-github"></i></a>
-            <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+    <section id="contact" class="py-20 px-4 max-w-4xl mx-auto">
+        <div class="glass-card p-8 sm:p-12 rounded-3xl relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-accentBlue to-accentPurple">ติดต่อฉัน</h2>
+                <p class="text-gray-400 text-sm">หากต้องการสอบถามข้อมูลเพิ่มเติมหรือนัดสัมภาษณ์ สามารถติดต่อได้ผ่านช่องทางด้านล่างครับ</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mb-10">
+                <div class="p-4 rounded-xl bg-gray-900/40 border border-gray-800">
+                    <div class="text-accentBlue text-xl mb-2"><i class="fa-solid fa-envelope"></i></div>
+                    <div class="text-xs text-gray-400 mb-1">อีเมล</div>
+                    <div class="text-sm font-medium text-gray-200">your.email@gmail.com</div>
+                </div>
+                <div class="p-4 rounded-xl bg-gray-900/40 border border-gray-800">
+                    <div class="text-accentPurple text-xl mb-2"><i class="fa-solid fa-phone"></i></div>
+                    <div class="text-xs text-gray-400 mb-1">เบอร์โทรศัพท์</div>
+                    <div class="text-sm font-medium text-gray-200">0xx-xxx-xxxx</div>
+                </div>
+                <div class="p-4 rounded-xl bg-gray-900/40 border border-gray-800">
+                    <div class="text-cyan-400 text-xl mb-2"><i class="fa-brands fa-github"></i></div>
+                    <div class="text-xs text-gray-400 mb-1">GitHub</div>
+                    <div class="text-sm font-medium text-gray-200">github.com/yourname</div>
+                </div>
+            </div>
+
+            <!-- Simple Contact Form (Frontend simulation) -->
+            <form onsubmit="event.preventDefault(); alert('ส่งข้อความจำลองเรียบร้อยแล้ว ขอบคุณครับ!');" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <input type="text" placeholder="ชื่อของคุณ" required class="w-full px-4 py-3 rounded-xl bg-gray-900/80 border border-gray-800 focus:border-accentBlue focus:outline-none text-sm text-gray-200">
+                    <input type="email" placeholder="อีเมลของคุณ" required class="w-full px-4 py-3 rounded-xl bg-gray-900/80 border border-gray-800 focus:border-accentBlue focus:outline-none text-sm text-gray-200">
+                </div>
+                <textarea rows="4" placeholder="ข้อความ / รายละเอียดที่ต้องการติดต่อ..." required class="w-full px-4 py-3 rounded-xl bg-gray-900/80 border border-gray-800 focus:border-accentBlue focus:outline-none text-sm text-gray-200"></textarea>
+                <div class="text-center">
+                    <button type="submit" class="px-8 py-3 rounded-xl bg-gradient-to-r from-accentBlue to-accentPurple text-black font-semibold hover:opacity-90 transition shadow-lg shadow-cyan-500/20 text-sm">
+                        ส่งข้อความ <i class="fa-solid fa-paper-plane ml-1"></i>
+                    </button>
+                </div>
+            </form>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Portfolio. Built with Single HTML File.</p>
+    <footer class="py-8 text-center text-xs text-gray-500 border-t border-gray-800/50">
+        <p>&copy; 2026 Cooperative Education Portfolio. All rights reserved.</p>
     </footer>
 
+    <!-- Mobile Menu Script -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
 </body>
 </html>
